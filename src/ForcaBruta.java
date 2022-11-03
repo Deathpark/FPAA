@@ -91,42 +91,59 @@ public class ForcaBruta {
         return conjunto;
     }
 
-    public static void main(String[] args) {
-        ForcaBruta solucao = new ForcaBruta();
+    
+    private static void compararResultados(ArrayList<ArrayList<Integer>> subConjuntos, int valor) {
+        int soma = 0, i = 0;
+        do {
+            soma = 0;
+            
+            ArrayList<Integer> conjunto = subConjuntos.get(i);
+            
+            for(int j = 0; j < conjunto.size(); j++) {
+                soma += conjunto.get(j);
+            }
 
+            i++;
+        } while(i < subConjuntos.size() && valor != soma);
+
+        if(valor == soma) {
+            i--;
+            System.out.println("O conjunto abaixo satisfaz a soma:");
+            System.out.print("{");
+            for (Integer num : subConjuntos.get(i)) {
+                System.out.print(num + ", ");
+            }
+            System.out.println("}");
+        } else {
+            System.out.println("Nenhum subconjunto satisfaz a soma!");
+        }
+    }
+
+    public static void main(String[] args) {
         Scanner teclado = new Scanner(System.in);
         System.out.println("Digite o tamanho do vetor:");
         int tamanhoVetor = teclado.nextInt();
-        
         if(tamanhoVetor < 2) {
             do {
                 System.out.println("O tamanho do vetor deve ser maior que 2!");
-                System.out.println("Digite novamente o tamanho do vetor!");
+                System.out.println("Digite novamente o tamanho do vetor:");
+                tamanhoVetor = teclado.nextInt();
+            } while(tamanhoVetor < 2);
+        }
+        System.out.println("Digite o valor que deve ser comparado:");
+        int valor = teclado.nextInt();
+        if(valor < 0) {
+            do {
+                System.out.println("O valor deve ser positivo!");
+                System.out.println("Digite novamente o valor:");
                 tamanhoVetor = teclado.nextInt();
             } while(tamanhoVetor < 2);
         }
 
         ArrayList<Integer> conjunto = new ArrayList<>();
         conjunto = geradorDeConjuntos(tamanhoVetor);
-
+       
         ArrayList<ArrayList<Integer>> subConjuntos = acharTodosSubConjuntos(conjunto);
-        
-        //Pegar valor a ser comparado do teclado
-        //Criar função para comparar todos as somas
-
-        System.out.println("****Total*****" + subConjuntos.size());
-        for (int i = 0; i < subConjuntos.size(); ++i) {
-          System.out.print("{");
-          for (Integer it : subConjuntos.get(i)) {
-            System.out.print(it + ", ");
-          }
-          System.out.println("}");
-        }
-        System.out.println("****Total*****" + subConjuntos.size());
+        compararResultados(subConjuntos, valor);
       }
-  
-            //boolean valorIgual = this.verificaSubConjunto(subConjunto, valor);
-            //if(valorIgual) {
-            //    System.out.println("O subconjunto abaixo possui a soma igual ao valor passado");
-            //}
 }

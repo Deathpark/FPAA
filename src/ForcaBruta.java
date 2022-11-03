@@ -119,31 +119,19 @@ public class ForcaBruta {
         }
     }
 
-    public static void main(String[] args) {
-        Scanner teclado = new Scanner(System.in);
-        System.out.println("Digite o tamanho do vetor:");
-        int tamanhoVetor = teclado.nextInt();
-        if(tamanhoVetor < 2) {
-            do {
-                System.out.println("O tamanho do vetor deve ser maior que 2!");
-                System.out.println("Digite novamente o tamanho do vetor:");
-                tamanhoVetor = teclado.nextInt();
-            } while(tamanhoVetor < 2);
-        }
-        System.out.println("Digite o valor que deve ser comparado:");
-        int valor = teclado.nextInt();
-        if(valor < 0) {
-            do {
-                System.out.println("O valor deve ser positivo!");
-                System.out.println("Digite novamente o valor:");
-                tamanhoVetor = teclado.nextInt();
-            } while(tamanhoVetor < 2);
-        }
-
+    public long inicio(int tamanhoVetor, int valor) {
         ArrayList<Integer> conjunto = new ArrayList<>();
         conjunto = geradorDeConjuntos(tamanhoVetor);
-       
+        
+        long tempoIncial = System.currentTimeMillis();
         ArrayList<ArrayList<Integer>> subConjuntos = acharTodosSubConjuntos(conjunto);
         compararResultados(subConjuntos, valor);
-      }
+        long tempoFinal = System.currentTimeMillis();
+
+        return tempoFinal-tempoIncial;
+    }
+
+    public static void main(String[] args) {
+        
+    }
 }

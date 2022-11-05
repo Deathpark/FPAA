@@ -126,9 +126,9 @@ public class ForcaBruta {
         long tempoIncial = System.currentTimeMillis();
         ArrayList<ArrayList<Integer>> subConjuntos = acharTodosSubConjuntos(conjunto);
         compararResultados(subConjuntos, valor);
-        long tempoFinal = System.currentTimeMillis();
+        long tempoTotal = System.currentTimeMillis() - tempoIncial;
 
-        return tempoFinal-tempoIncial;
+        return tempoTotal;
     }
 
     public static void main(String[] args) {
